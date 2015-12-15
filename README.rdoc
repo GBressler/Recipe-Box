@@ -1,3 +1,13 @@
+See Lynda Rails 7-10 4:52 Named scopes
+
+Need a scope like:
+
+scope :recent, lambda {
+	where(:created_at => 1.week.ago..Time.now)
+}
+
+
+
 == README
 
 This README would normally document whatever steps are necessary to get the

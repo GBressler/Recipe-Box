@@ -1,0 +1,13 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+<p>Hi, <%= current_user.email %>!</p>
+<h2>Your Recipe Collection</h2>
+<ul>
+	<% @recipe_collection.line_items.each do |item| %>
+	<li><%= item.recipe.title %></li>
+	<% end %>
+</ul>
+
+<%= link_to 'Edit', edit_recipe_collection_path(@recipe_collection) %> |
+<%= link_to 'Back', recipe_collection_path %>

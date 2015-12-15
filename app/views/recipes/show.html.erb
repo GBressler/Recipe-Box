@@ -1,0 +1,42 @@
+.main_content
+
+  #recipe_top.row
+    .col-md-4
+     <% image_tag @recipe.image.url(:medium), class: "recipe_image" %>
+    .col-md-8
+      #recipe_info
+        <h1> <%= @recipe.title %> </h1>
+        <%= button_to 'Add to My Recipes', line_items_path(recipe_id: @recipe) %>
+        <p class="description"> <%= @recipe.description %> 
+        </p>
+        <p>
+          Submitted by:
+         <%= @recipe.user.email %>
+        </p>
+
+  .row
+    .col-md-6
+      #ingredients
+        <h2> Ingredients </h2>
+        <ul>
+          <% @recipe.ingredients.each do |ingredient| %>
+            <li><%= ingredient.name %><li>
+        </ul>
+       <% end %>
+
+    .col-md-6
+      #directions
+        <h2> Directions </h2>
+        <ul>
+          <% @recipe.directions.each do |direction| %>
+            <li><%= direction.step %><li>
+        </ul>
+       <% end %>
+
+  .row
+    .col-md-12
+      <%= link_to "Back", root_path, class: "btn btn-default" %>
+    <% if user_signed_in? %>
+      <%= link_to "Edit", edit_recipe_path, class: "btn btn-default" %>
+      <%= link_to "Delete", recipe_path, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-default" %>
+    <% end %>
