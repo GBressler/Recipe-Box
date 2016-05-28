@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129203838) do
+ActiveRecord::Schema.define(version: 20151229223926) do
 
   create_table "directions", force: :cascade do |t|
     t.text     "step"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20151129203838) do
     t.integer  "recipe_collection_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.date     "last_eaten"
   end
 
   add_index "line_items", ["recipe_collection_id"], name: "index_line_items_on_recipe_collection_id"

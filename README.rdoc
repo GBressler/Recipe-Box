@@ -6,7 +6,7 @@ scope :recent, lambda {
 	where(:created_at => 1.week.ago..Time.now)
 }
 
-
+http://stackoverflow.com/questions/5013880/ruby-compare-2-arrays-for-matches-and-count-the-number-of-match-instances
 
 == README
 

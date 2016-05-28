@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Recipe Collections</h1>
-<p> Hi, <%= current_user %> !</p>
+<p> Hi, <%= current_user.email %> !</p>
 <table>
   <thead>
     <tr>
@@ -12,7 +12,7 @@
   <tbody>
     <% @recipe_collection.each do |recipe_collection| %>
       <tr>
-        <td><%= @user %></td>
+        <td><%= recipe_collection.id %></td>
         <td><%= link_to 'Show', recipe_collection %></td>
         <td><%= link_to 'Edit', edit_recipe_collection_path(recipe_collection) %></td>
         <td><%= link_to 'Destroy', recipe_collection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -24,3 +24,4 @@
 <br>
 
 <%= link_to 'New Recipe collection', new_recipe_collection_path %>
+

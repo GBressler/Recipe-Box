@@ -1,5 +1,5 @@
 class CreateRecipeCollections < ActiveRecord::Migration
-  def change
+  def up
     create_table :recipe_collections do |t|
 
       t.timestamps null: false

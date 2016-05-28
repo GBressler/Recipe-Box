@@ -19,6 +19,10 @@
     <%= f.label :recipe_collection_id %><br>
     <%= f.text_field :recipe_collection_id %>
   </div>
+  <div class="field">
+    <%= f.label :last_eaten %><br>
+    <%= date_select(:line_item, :last_eaten, :use_two_digit_numbers => true) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
