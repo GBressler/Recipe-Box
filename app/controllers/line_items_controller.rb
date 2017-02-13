@@ -1,26 +1,13 @@
 class LineItemsController < ApplicationController
-  #include UserRecipe #Error: Couldn't find recipe with id / off: undefined meth: Set_rec_collect
   #before_action :set_recipe_collection, only: [:create]
   #before_action :set_recipe, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy, :last_eaten] 
 
 
   def index
-    #@line_items = LineItem.all
-    @line_items = LineItem.where(nil) #this is required, having only this will allow me to call all scopes in the view
+   
+    @line_items = LineItem.where(nil) 
     @line_items = LineItem.all
-    
-    #the following works:
-    #@picked_recipes = []
-    #@menu = @line_items.this_week
-    #@menu.each do |recipe|
-      #@picked_recipes << recipe.recipe_id
-    #end
-    
-    #cookies[:picked_recipes] = @picked_recipes
-    #@cookie = cookies[:picked_recipes]
-
-      #@line_items.this_week << cookies[:picked_recipes]
 
       respond_to do |format|
       format.html
@@ -29,23 +16,13 @@ class LineItemsController < ApplicationController
       end
       end
 
-#@line_items.this_week.replace_recipe(0)
-    #@line_items.this_week
-    
-#Something  to eventually get Flo's solution to work
-    #x = LineItem.this_week.each do |line_item|
-     # line_item.id
-    #end
 
-    #Something old, but could be useful
-    #@line_items.this_week
-    #@intersection = @line_items.this_week & @line_items.two_weeks_ago || @line_items.this_week & @line_items.three_weeks_ago
   end
 
   # GET /line_items/1
   # GET /line_items/1.json
   def show
-    #@cookie = cookies[:picked_recipes]  #Delete this later.
+    
   end
 
   # GET /line_items/new
@@ -62,11 +39,8 @@ class LineItemsController < ApplicationController
   def create
     recipe = Recipe.find(params[:recipe_id])
     user = current_user
-    #@line_item = @line_item.build_line_item(recipe: recipe)
-    #recipe = Recipe.find(params[:recipe_id])
-    @line_item = user.line_items.build(recipe: recipe) #consider @recipe, also on line 29
-#@line_item = @recipe_collection.add_recipe(recipe.id)
-     #@line_item.last_eaten = 4.weeks.ago.to_date
+    
+    @line_item = user.line_items.build(recipe: recipe) 
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to @line_item.recipe, notice: 'Line item was successfully created.' }
@@ -111,23 +85,9 @@ class LineItemsController < ApplicationController
     cookies[:this_week_line_item_ids] = current_ids_of_line_items_this_week - [id_of_line_item_to_replace] + [replacing_id]
 
     redirect_to action: :index
-    #redirect_to action: :menu
   end
 
-  def menu
-    #@line_items = LineItem.where(nil)
-    @line_items = LineItem.all
-    #@menu = LineItem.where(id: ids_of_line_items_this_week)
-
-     respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "line_items", disposition: "inline", template: "line_items/menu.html.erb"   # Excluding ".pdf" extension.
-      end
-      end
-  end
   
-
   private
     # Use callbacks to share common setup or constraints between actions.
 
