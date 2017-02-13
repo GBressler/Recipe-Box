@@ -17,7 +17,7 @@
     <div class="collapse in" id="menu">
       <div class="well"> 
     <br>
-      <% LineItem.where(id: ids_of_line_items_this_week).each do |line_item, ingredient| %>
+      <% LineItem.where(id: ids_of_line_items_this_week).each do |line_item| %>
     <li><%= line_item.recipe.title %> <%= link_to 'Replace', line_item_replace_weekly_line_item_path(line_item_id: line_item.id), method: :put, :class => "btn btn-default btn-xs" %></li>
     <% end %>
       </div>
