@@ -1,0 +1,35 @@
+<h2> My Favorite Recipes <%# link_to @user.email, profile_path(@user) %></h2>
+<%= @user.username %> <br>
+<%= @user.email %>
+
+
+
+
+<br><br>
+<%= @user.recipes.count %>
+<br><br>
+<% @line_items.each do |line_item| %>
+<%= line_item.recipe.title %> <br>
+<%= line_item.last_eaten %> <br>
+<%end%>
+<table style="width: 100%">
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>User</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @line_items.each do |item| %>
+    <tr>
+    <td><%=  item[0] %></td>
+    <td><%# @user.username %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+
+
+<%= link_to 'Back', profiles_path %>

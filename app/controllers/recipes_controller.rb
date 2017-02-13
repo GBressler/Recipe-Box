@@ -1,6 +1,9 @@
 class RecipesController < ApplicationController
+
 	before_action :find_recipe, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user!, except: [:index, :show]
+	#before_destroy :ensure_not_referenced_by_any_line_item
+
 
 	def index
 		@recipe = Recipe.all
@@ -42,11 +45,20 @@ class RecipesController < ApplicationController
 
 	private
 	def recipe_params
-		params.require(:recipe).permit(:title, :description, :image, ingredients_attributes: [:id, :name, :_destroy], directions_attributes: [:id, :step, :_destroy])
+		params.require(:recipe).permit( :title, :description, :image, ingredients_attributes: [:id, :name, :_destroy], directions_attributes: [:id, :step, :_destroy])
 	end
 
 	def find_recipe
 		@recipe = Recipe.find(params[:id])
+	end
+
+	def ensure_not_referenced_by_any_line_item
+		if line_items.empty?
+			return true
+		else
+			errors.add(:base, 'Line Items present')
+			return false
+		end
 	end
 
 end

@@ -1,9 +1,10 @@
 class Recipe < ActiveRecord::Base
-	has_many :line_items
+	has_many :line_items 
 	before_destroy :ensure_not_referenced_by_any_line_item
   has_many :ingredients
   has_many :directions
-  belongs_to :user
+ 	has_many :users, :through => :line_items
+ 	#belongs_to :user
 
 accepts_nested_attributes_for :ingredients, 
 															reject_if: :all_blank, 

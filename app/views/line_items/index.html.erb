@@ -1,27 +1,121 @@
+<%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Line Items</h1>
-<p>Hi, <%= current_user.email %>! </p>
+<h1>Line Items</h1>
+<p>Hi, <%= current_user.username %>! </p>
+
+<div class="row">
+
+ <div class="col-xs-6 col-sm-4" >
+   
+    <button class="btn btn-primary " type="button" data-toggle="collapse" data-target="#menu" aria-expanded="true" aria-controls="menu">
+     This Week's Menu
+    </button>
+    <div class="collapse in" id="menu">
+      <div class="well"> 
+    <%# button_to "Use This Menu", new_line_item_path %>
+    <br>
+
+      <% LineItem.where(id: ids_of_line_items_this_week).each do |line_item, ingredient| %>
+    <li><%= line_item.recipe.title %> <%= link_to 'Replace', line_item_replace_weekly_line_item_path(line_item_id: line_item.id), method: :put, :class => "btn btn-default btn-xs" %>
+    <br>
+     <%# line_item.recipe.ingredients.name %> </li>
+  <% end %>
+
+    <br>
+      </div>
+    </div>
+
+   
+
+     <!-- <%# LineItem.where(id: ids_of_line_items_this_week).each do |line_item| %>
+        <li><%# line_item.recipe.title %>  <%# link_to "Replace", line_item_replace_weekly_line_item_path(line_item_id: line_item.id), method: :put %></li>
+      <%# end %> -->
+  </div> 
+ 
+
+ 
+  <div class="col-xs-6 col-sm-4">
+    <button class="btn btn-primary " type="button" data-toggle="collapse" data-target="#lastWeek" aria-expanded="false" aria-controls="lastWeek">
+     Last Week's Menu
+    </button>
+      <div class="collapse" id="lastWeek">
+        <div class="well">
+          <p>Recipes Prepared <strong>Last</strong> Week</p>
+            <% @line_items.last_week.each do |line_item| %>
+              <li><%= line_item.recipe.title %></li>  <br>
+            <% end %>
+        </div>
+      </div>
+  </div>
 
 
-<div>
-  <p>Here's your menu for this week.  Is this menu ok or would you like something different?</p>
-</div>
-<div>
-  <table>
-  <tbody>
-    <tr>
-    <td><%= button_to "New Line Item", new_line_item_path %></td>
-    <td><%= button_to "Dropdown button for Menu", new_line_item_path %></td>
-    </tr>
-  </tbody>
-</table>
- <%= button_to "New", new_line_item_path %>
+
+<!--<p>Recipes Prepared <strong>This</strong> Week....It's where you're at!
+<%# button_to "Use This Menu", new_line_item_path %>
+<br>
+
+
+<%# LineItem.where(id: ids_of_line_items_this_week).each do |line_item| %>
+   <li><%# line_item.recipe.title %>  <%# link_to "Replace", line_item_replace_weekly_line_item_path(line_item_id: line_item.id), method: :put %></li>
+  
+   
+  <%#end%>
+ -->
+
+
+<!-- Probably ignore everything below this 12/17/2016-->
+
+<!--use this to iterate through the thisweek Scope. -->
+<%#@line_items.this_week.each do |r| %> 
+  <%# r.recipe.title %>
+<%#end%>
+
+
+<!--<p>Recipes Prepared <strong>This</strong> Week</p> -->
+<%# @line_items.this_week.cycle(1) { |x| puts x} %>
+<%# @line_items.this_week.each do |line_item| %>
+<%# line_item.recipe.title %>
+<%#link_to 'Show', line_item %> 
+<%#end%>
+  <div class="col-xs-6 col-sm-4">
+
+    <button class="btn btn-primary " type="button" data-toggle="collapse" data-target="#twoWeeksAgo" aria-expanded="false" aria-controls="twoWeeksAgo">
+      Menu from 2 Weeks Ago
+    </button>
+      <div class="collapse" id="twoWeeksAgo">
+        <div class="well">
+          <p>Recipes Prepared <strong>2 Weeks Ago</strong></p>
+  <br>  
+        <% @line_items.two_weeks_ago.each do |line_item| %>
+          <%= line_item.recipe.title %> <br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<!--End of Container for Menus -->
+</div>  
+
+<br>
+
+<%= link_to "Download/Print a PDF", line_items_path(@line_items, format: "pdf")  %>
+<br>
+<br>
+<br>
+
+<button class="btn btn-primary " type="button" data-toggle="collapse" data-target="#favoriteRecipes" aria-expanded="false" aria-controls="favoriteRecipes">
+  Favorite Recipes
+</button>
+<div class="collapse" id="favoriteRecipes">
+  <div class="well">
 <table>
   <thead>
     <tr>
       <th>Recipe</th>
-      <th>Recipe Collection</th>
+      <!--<th>Recipe Collection</th> -->
       <th colspan="3">Last Eaten</th>
     </tr>
   </thead>
@@ -30,26 +124,32 @@
     <% @line_items.each do |line_item| %>
       <tr>
         <td><%= line_item.recipe.title %></td>
-        <td><%= line_item.recipe_collection %></td>
+        <!--<td><%= line_item.recipe_collection_id%></td>-->
         <td><%= line_item.last_eaten %></td>
-        <td><%= link_to 'Show', line_item %></td>
-        <td><%= link_to 'Edit', edit_line_item_path(line_item) %></td>
-        <td><%= link_to 'Destroy', line_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+       <!-- <td><%# link_to 'Show', line_item, :class => "btn btn-default btn-xs" %></td>-->
+        <td><%= link_to 'Update', edit_line_item_path(line_item), :class => "btn btn-default btn-xs" %></td>
+        <td><%= link_to 'Delete', line_item, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-xs" %></td>
+<% end %>
+    </tr>
   </tbody>
 </table>
-
+</div>
 </div>
 
 <br>
-<% @line_items.three_weeks_ago.each do |line_item| %>
-<%= line_item.recipe.title %> <br>
-<% end %>
-<%= link_to 'New Line item', new_line_item_path %>
-<%= button_to(@line_items.three_weeks_ago) %>
-
 <br>
-<% @line_items.two_weeks_ago.each do |line_item| %>
-<%= line_item.recipe.title %> <br>
-<% end %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  </div> 

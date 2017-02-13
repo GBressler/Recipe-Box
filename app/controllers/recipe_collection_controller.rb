@@ -69,6 +69,6 @@ class RecipeCollectionController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_collection_params
-      params[:recipe_collection]
+      params[:recipe_collection].permit( :update, :line_item_id)
     end
 end

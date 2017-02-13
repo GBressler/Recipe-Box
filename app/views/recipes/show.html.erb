@@ -7,11 +7,12 @@
       #recipe_info
         <h1> <%= @recipe.title %> </h1>
         <%= button_to 'Add to My Recipes', line_items_path(recipe_id: @recipe) %>
+        
         <p class="description"> <%= @recipe.description %> 
         </p>
         <p>
           Submitted by:
-         <%= @recipe.user.email %>
+         <%# @recipe.user.email %>
         </p>
 
   .row

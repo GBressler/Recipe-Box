@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229223926) do
+ActiveRecord::Schema.define(version: 20161018000139) do
 
   create_table "directions", force: :cascade do |t|
     t.text     "step"
@@ -37,10 +37,12 @@ ActiveRecord::Schema.define(version: 20151229223926) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.date     "last_eaten"
+    t.integer  "user_id"
   end
 
   add_index "line_items", ["recipe_collection_id"], name: "index_line_items_on_recipe_collection_id"
   add_index "line_items", ["recipe_id"], name: "index_line_items_on_recipe_id"
+  add_index "line_items", ["user_id"], name: "index_line_items_on_user_id"
 
   create_table "recipe_collections", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(version: 20151229223926) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

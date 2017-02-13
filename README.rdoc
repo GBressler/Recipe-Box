@@ -1,38 +1,35 @@
-See Lynda Rails 7-10 4:52 Named scopes
-
-Need a scope like:
-
-scope :recent, lambda {
-	where(:created_at => 1.week.ago..Time.now)
-}
-
-http://stackoverflow.com/questions/5013880/ruby-compare-2-arrays-for-matches-and-count-the-number-of-match-instances
 
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a version of the Recipe Box app by Mackenzie Childs.  Added functionality includes:
 
-Things you may want to cover:
+* Being able to include a recipe in a collection.
 
-* Ruby version
+* Set/Edit the date for the last time the recipe was cooked/eaten.
 
-* System dependencies
+* See what was prepared the previous 2 weeks.
 
-* Configuration
+* Have a randomly generated list of recipes for you to eat this week...no thinking required.
 
-* Database creation
+* Download list of Favorite Recipes, This Weeks Menu and the menus for the previous 2 weeks
 
-* Database initialization
 
-* How to run the test suite
+-----TO DO-----
+*Clean up views (change HAML TO ERB)
 
-* Services (job queues, cache servers, search engines, etc.)
+*Improve Sessions for various users
 
-* Deployment instructions
+*Print list of ingredients for This Week's Menu
 
-* ...
+*Basic Testing
 
+*Update site layout
+
+*Accept Button for This Weeks Menu that will update Last Eaten.
+
+*JS for This Week's Menu, so that when a recipe is rejected the page doesn't reload.
+
+*Consider Removing Profiles Controller.
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

@@ -7,8 +7,9 @@
 
 <p>
   <strong>Recipe collection:</strong>
-  <%= @line_item.recipe_collection %>
+  <%= @line_item.recipe.title %>
 </p>
 
 <%= link_to 'Edit', edit_line_item_path(@line_item) %> |
 <%= link_to 'Back', line_items_path %>
+
