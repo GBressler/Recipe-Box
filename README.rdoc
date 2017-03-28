@@ -15,17 +15,20 @@ This is a version of the Recipe Box app by Mackenzie Childs.  Added functionalit
 
 
 -----TO DO-----
-*Clean up views (change HAML TO ERB)
+****Clean up views (change HAML TO ERB)
 
-*Improve Sessions for various users
+****Improve Sessions for various users
+http://stackoverflow.com/questions/13240109/implement-add-to-favorites-in-rails-3-4
 
-*Print list of ingredients for This Week's Menu
+http://schmidt-happens.com/articles/2014/06/04/favoriting-system-in-rails.html
+
+*Print list of ingredients for This Week's Menu - DONE
 
 *Basic Testing
 
 *Update site layout
 
-*Accept Button for This Weeks Menu that will update Last Eaten.
+****Accept Button for This Weeks Menu that will update Last Eaten.
 
 *JS for This Week's Menu, so that when a recipe is rejected the page doesn't reload.
 
@@ -33,3 +36,11 @@ This is a version of the Recipe Box app by Mackenzie Childs.  Added functionalit
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+ids_of_line_items_this_week = [13, 15, 27, 29]
+LineItem.where(id: ids_of_line_items_this_week).each do |line_item| 
+  puts line_item.recipe.title
+  receta = line_item.recipe
+  receta.ingredients.each do |ingredient|
+    puts ingredient.name
+  end
+end

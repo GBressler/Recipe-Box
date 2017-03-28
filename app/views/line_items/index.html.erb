@@ -5,7 +5,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Line Items</h1>
-<p>Hi, <%= current_user.username %>! </p>
+<p>Hi, <%= current_user.email %>! </p>
 
 <div class="row">
 
@@ -18,8 +18,19 @@
       <div class="well"> 
     <br>
       <% LineItem.where(id: ids_of_line_items_this_week).each do |line_item| %>
-    <li><%= line_item.recipe.title %> <%= link_to 'Replace', line_item_replace_weekly_line_item_path(line_item_id: line_item.id), method: :put, :class => "btn btn-default btn-xs" %></li>
-    <% end %>
+        <%# receta = line_item.recipe %>
+        <li><%= line_item.recipe.title %> <%= link_to 'Replace', line_item_replace_weekly_line_item_path(line_item_id: line_item.id), method: :put, :class => "btn btn-default btn-xs" %>
+        </li>
+        <%end%>
+        <br>
+        <br>
+        <p>Ingredients to buy:</p>
+        <% LineItem.where(id: ids_of_line_items_this_week).each do |line_item| %>
+        <% receta = line_item.recipe %>
+          <% receta.ingredients.each do |ingredient| %>
+          <li> <%= ingredient.name %> </li>
+          <%end%>
+          <%end%>
       </div>
     </div>
   </div> 
@@ -46,7 +57,7 @@
       <div class="collapse" id="twoWeeksAgo">
         <div class="well">
           <p>Recipes Prepared <strong>2 Weeks Ago</strong></p>
-  <br>  
+          <br>  
         <% @line_items.two_weeks_ago.each do |line_item| %>
           <%= line_item.recipe.title %> <br>
         <% end %>

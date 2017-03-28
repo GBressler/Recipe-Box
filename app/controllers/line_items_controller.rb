@@ -112,7 +112,7 @@ class LineItemsController < ApplicationController
       # to have the ids we need to "unjoin" (i.e. split) the string
       this_week_line_item_ids = cookies[:this_week_line_item_ids].split "&"
       # make sure the ids are integers, not strings
-      this_week_line_item_ids.map! { |id| id.to_i }
+      #this_week_line_item_ids.map! { |id| id.to_i }
 
       # if we have less than 3 we complete by random other ones
       missing_line_items_nb = 7 - this_week_line_item_ids.size
