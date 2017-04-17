@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
 
-	before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+	before_action :find_recipe, only: [:show, :edit, :update, :destroy, :favorite]
 	before_action :authenticate_user!, except: [:index, :show]
 	#before_destroy :ensure_not_referenced_by_any_line_item
 
@@ -37,6 +37,23 @@ class RecipesController < ApplicationController
 				render 'edit'
 			end
 		end
+
+		def favorite
+    type = params[:type]
+    if type == "favorite"
+      current_user.favorites << @recipe
+      redirect_to :back, notice: 'You favorited #{@recipe.name}'
+
+    elsif type == "unfavorite"
+      current_user.favorites.delete(@recipe)
+      redirect_to :back, notice: 'Unfavorited #{@recipe.name}'
+
+    else
+      # Type missing, nothing happens
+      redirect_to :back, notice: 'Nothing happened.'
+    end
+  end
+
 
 		def destroy
 			@recipe.destroy

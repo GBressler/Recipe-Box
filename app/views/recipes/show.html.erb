@@ -6,6 +6,11 @@
     .col-md-8
       #recipe_info
         <h1> <%= @recipe.title %> </h1>
+        <% if current_user %>
+        <%= link_to "favorite",   favorite_recipe_path(@recipe, type: "favorite"), method: :put %>
+        <%= link_to "unfavorite", favorite_recipe_path(@recipe, type: "unfavorite"), method: :put %>
+        <% end %>
+
         <%= button_to 'Add to My Recipes', line_items_path(recipe_id: @recipe) %>
         
         <p class="description"> <%= @recipe.description %> 

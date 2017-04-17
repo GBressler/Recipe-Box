@@ -3,7 +3,7 @@ class LineItem < ActiveRecord::Base
   belongs_to :user #remove?
   belongs_to :recipe
   
-
+  scope :created_by, -> (user_id) { where(user_id: user_id) }
  
   scope :last_week, lambda {where("line_items.last_eaten >= ?", 8.days.ago.to_date)}
   

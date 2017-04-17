@@ -5,6 +5,7 @@ class Recipe < ActiveRecord::Base
   has_many :directions
  	has_many :users, :through => :line_items
  	#belongs_to :user
+ 	has_many :favorited_by, through: :line_items, source: :user
 
 accepts_nested_attributes_for :ingredients, 
 															reject_if: :all_blank, 

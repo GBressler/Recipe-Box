@@ -9,6 +9,8 @@ class LineItemsController < ApplicationController
     @line_items = LineItem.where(nil) 
     @line_items = LineItem.all
 
+    @line_items = @line_items.created_by(current_user.id)
+
       respond_to do |format|
       format.html
       format.pdf do

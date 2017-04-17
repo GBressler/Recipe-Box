@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   end
   resources :recipe_collection
   devise_for :users
-  resources :recipes
+  resources :recipes do
+    put :favorite, on: :member
+  end
+
   root "recipes#index"
 
 end
